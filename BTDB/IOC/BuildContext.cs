@@ -73,10 +73,7 @@ namespace BTDB.IOC
             {
                 if (type.IsDelegate())
                 {
-                    var resultType = type.GetMethod("Invoke").ReturnType;
-                    var nestedRegistration = ResolveNeedBy(resultType, key);
-                    if (nestedRegistration == null) return null;
-                    registration = new DelegateImpl(key, type, nestedRegistration);
+                    registration = new DelegateImpl(key, type);
                 }
                 else if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Lazy<>))
                 {
